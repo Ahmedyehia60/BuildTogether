@@ -8,19 +8,20 @@ import { FaGithub } from "react-icons/fa6";
 import { HiOutlineMail } from "react-icons/hi";
 import { HiOutlineLockClosed } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import { loginSchema } from "@/schemas/login.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-type LoginFormData = {
-  email: string;
-  password: string;
-};
+type LoginFormData = z.infer<typeof loginSchema>;
 
 function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>();
-
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
   const onSubmit = (data: LoginFormData) => {
     console.log(data);
   };
@@ -44,13 +45,7 @@ function Login() {
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.formGroup}>
             <Input
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address",
-                },
-              })}
+              {...register("email")}
               icon={<HiOutlineMail size={20} />}
               placeholder="Email"
               type="email"
@@ -62,9 +57,7 @@ function Login() {
           </div>
           <div className={styles.formGroup}>
             <Input
-              {...register("password", {
-                required: "Password is required",
-              })}
+              {...register("password")}
               icon={<HiOutlineLockClosed size={20} />}
               type="password"
               placeholder="Password"

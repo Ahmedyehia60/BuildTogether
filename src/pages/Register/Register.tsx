@@ -8,19 +8,20 @@ import { FaGithub } from "react-icons/fa6";
 import { HiOutlineMail, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineLockClosed } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import { registerSchema } from "@/schemas/register.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-type SignUpFormData = {
-  name: string;
-  email: string;
-  password: string;
-};
+type SignUpFormData = z.infer<typeof registerSchema>;
 
 function Register() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpFormData>();
+  } = useForm<SignUpFormData>({
+    resolver: zodResolver(registerSchema),
+  });
 
   const onSubmit = (data: SignUpFormData) => {
     console.log(data);
@@ -44,9 +45,7 @@ function Register() {
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.formGroup}>
             <Input
-              {...register("name", {
-                required: "Name is required",
-              })}
+              {...register("name")}
               icon={<HiOutlineUser size={20} />}
               placeholder="Name"
               type="text"
@@ -59,13 +58,7 @@ function Register() {
 
           <div className={styles.formGroup}>
             <Input
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address",
-                },
-              })}
+              {...register("email")}
               icon={<HiOutlineMail size={20} />}
               placeholder="Email"
               type="email"
@@ -77,9 +70,7 @@ function Register() {
           </div>
           <div className={styles.formGroup}>
             <Input
-              {...register("password", {
-                required: "Password is required",
-              })}
+              {...register("password")}
               icon={<HiOutlineLockClosed size={20} />}
               type="password"
               placeholder="Password"
