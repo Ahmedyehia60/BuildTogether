@@ -1,0 +1,41 @@
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fbfbfb;
+}
+
+.spinner span {
+  display: inline-block;
+  animation: wave 0.8s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+.fullScreen {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #172d4d;
+
+  z-index: 9999;
+}
