@@ -19,7 +19,7 @@
 
 .title {
   max-width: 400px;
-  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-size: clamp(2.2rem, 2vw, 3rem);
   font-weight: 600;
   margin-bottom: 1rem;
 }

@@ -56,10 +56,17 @@
   font-weight: 500;
 }
 
+
 .checkbox {
-  margin-top: 4px;
+  margin-top: 3px;
   cursor: pointer;
+  width: 14px;
+ 
+  accent-color: #172d4d; 
+  cursor: pointer;
+ 
 }
+
 
 .formButton {
   background-color: #172d4d;
@@ -144,18 +151,3 @@
 }
 
 
-
-/* Tablet */
-@media (max-width: 1024px) {
-
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-
-}
